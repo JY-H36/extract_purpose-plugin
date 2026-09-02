@@ -1,0 +1,38 @@
+{
+  "id": "extract_purpose",
+  "name": "Extract Purpose",
+  "description": "Intercepts tool calls (read, write, edit, exec, process, agents_list, nodes, canvas, tts, cron) via before_tool_call hook, extracts a short purpose summary from the tool parameters, and emits it as channelData so the frontend can render it as an intent badge on task cards.",
+  "version": "0.1.0",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "maxPurposeLength": {
+        "type": "number",
+        "minimum": 5,
+        "default": 20,
+        "description": "Maximum character length for the purpose summary (default: 20)."
+      },
+      "targetTools": {
+        "type": "array",
+        "items": { "type": "string" },
+        "default": ["read", "write", "edit", "exec", "process", "agents_list", "nodes", "canvas", "tts", "cron"],
+        "description": "List of tool names to intercept and extract purpose from."
+      }
+    }
+  },
+  "activation": {
+    "onStartup": true
+  },
+  "contracts": {
+    "tools": []
+  },
+  "uiHints": {
+    "maxPurposeLength": {
+      "label": "Max Purpose Length"
+    },
+    "targetTools": {
+      "label": "Target Tools"
+    }
+  }
+}
